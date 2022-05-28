@@ -1,5 +1,7 @@
 name: CICDwork
 on:
+  push:
+    branches: [ San20091991-patch-1  ]
   pull_request:
     branches: [ San20091991-patch-1  ]
   workflow_dispatch:
