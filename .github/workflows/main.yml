@@ -1,4 +1,4 @@
-name: CICDwork
+name: CICD- WORKFLOW
 on:
   push:
     branches: [ San20091991-patch-1  ]
