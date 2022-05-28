@@ -18,14 +18,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Merge development -> staging
+      - name: Merge Build -> Development
         uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
           from_branch: San20091991-patch-1
           target_branch: Development
           github_token: ${{ secrets.GITHUB_TOKEN }}
+  DeployStaging:
+    name: Deploy to Staging 
+    needs: [DeployDevelopment]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge development -> staging
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          from_branch: Development
+          target_branch: Staging
+          github_token: ${{ secrets.GITHUB_TOKEN }}
      
+  DeployPrduction:
+    name: Deploy to Production 
+    needs: [DeployStaging]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge staging -> production
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          from_branch: Staging
+          target_branch: Production
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           
           
  
