@@ -1,7 +1,5 @@
 name: CICDwork
 on:
-  push:
-    branches: [ Development ]
   pull_request:
     branches: [ Development ]
   workflow_dispatch:
@@ -14,27 +12,21 @@ jobs:
         run: echo Hello, world!	
   DeployDevelopment:
     name: Deploy to Dev 
-    if: github.event_name == 'pull_request'
+    if: github.base_ref == 'Development'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: Development
     steps:
      - name: Deploy
-       run: echo I am deploying!! 
-  DeployStaging:
-    name: Deploy to Staging 
-    needs: [Build]
-    runs-on: ubuntu-latest
-    environment: Staging
-    steps:
-     - name: Deploy
-       run: echo I am deploying! 
-  DeployProduction:
-    name: Deploy to Production 
-    needs: [DeployStaging]
-    runs-on: ubuntu-latest
-    environment: Production 
-    steps:
-     - name: Deploy
-       run: echo I am deploying!
+       uses: actions/github -script@0.2.0
+       with:
+         script: |
+           github.pullRequests.merge({
+             owner: context.payload.repository.owner.login,
+             repo: context.payload.repository.name,
+             pull_number: context.payload.pull_request.number
+           })
+            
+          
+ 
 
