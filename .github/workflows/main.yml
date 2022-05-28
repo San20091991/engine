@@ -1,9 +1,9 @@
 name: CICD
 on:
   push:
-    branches: [ Development ]
+    branches: [ main ]
   pull_request:
-    branches: [ Development ]
+    branches: [ main ]
   workflow_dispatch:
 jobs:
   Build:
