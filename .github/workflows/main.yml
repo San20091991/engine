@@ -1,7 +1,7 @@
 name: CICDwork
 on:
   pull_request:
-    branches: [ Development ]
+    branches: [ San20091991-patch-1  ]
   workflow_dispatch:
 jobs:
   Build:
@@ -12,21 +12,21 @@ jobs:
         run: echo Hello, world!	
   DeployDevelopment:
     name: Deploy to Dev 
-    if: github.base_ref == 'Development'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: Development
     steps:
-     - name: Deploy
-       uses: actions/github -script@0.2.0
-       with:
-         script: |
-           github.pullRequests.merge({
-             owner: context.payload.repository.owner.login,
-             repo: context.payload.repository.name,
-             pull_number: context.payload.pull_request.number
-           })
-            
+      - uses: actions/checkout@master
+
+      - name: Merge development -> staging
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: San20091991-patch-1
+          target_branch: Development
+          github_token: ${{ github.token }}
+     
+          
           
  
 
