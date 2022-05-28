@@ -16,12 +16,10 @@ jobs:
     name: Deploy to Dev 
     needs: [Build]
     runs-on: ubuntu-latest
-    environment: Development
     steps:
       - uses: actions/checkout@master
-
       - name: Merge development -> staging
-        uses: devmasx/merge-branch@master
+        uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
           from_branch: San20091991-patch-1
