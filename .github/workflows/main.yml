@@ -1,4 +1,4 @@
-name: CICDworkflow
+name: CICDwork
 on:
   push:
     branches: [ Development ]
