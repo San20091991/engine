@@ -20,7 +20,7 @@ jobs:
         uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
-          from_branch: San20091991-patch-1
+          from_branch: ^[San20091991-patch-]$
           target_branch: Development
           github_token: ${{ secrets.GITHUB_TOKEN }}
   DeployStaging:
