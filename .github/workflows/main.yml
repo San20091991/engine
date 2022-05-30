@@ -1,9 +1,7 @@
-name: CICD- WORKFLOW- Testing-3
+name: CICD- WORKFLOW- Testing-4
 on:
-  push:
-    branches: [ San20091991-patch-1  ]
   pull_request:
-    branches: [ San20091991-patch-1  ]
+    branches: [ Development  ]
   workflow_dispatch:
 jobs:
   Build:
@@ -22,7 +20,7 @@ jobs:
         uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
-          from_branch: San20091991-patch-1
+          from_branch: San20091991-patch-**
           target_branch: Development
           github_token: ${{ secrets.GITHUB_TOKEN }}
   DeployStaging:
