@@ -1,9 +1,7 @@
-name: CICD- WORKFLOW- Testing-3
+name: CICD- WORKFLOW- Testing-4
 on:
-  push:
-    branches: [ San20091991-patch-1  ]
   pull_request:
-    branches: [ San20091991-patch-1  ]
+    branches: [ Development  ]
   workflow_dispatch:
 jobs:
   Build:
